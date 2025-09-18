@@ -1,0 +1,572 @@
+:root {
+    --primary-color: #0D1B2A;
+    --secondary-color: #1B263B;
+    --accent-color: #415A77;
+    --light-color: #E0E1DD;
+    --nav-bg-color: #f8f9fa;
+    --nav-text-color: #343a40;
+    --donate-color: #87CEEB; /* Light Blue */
+    --font-family-headings: 'Montserrat', sans-serif;
+    --font-family-body: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--font-family-body);
+    background-color: #ffffff;
+    color: #333333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2 {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 500;
+}
+
+h3, h4, h5, h6 {
+    font-family: 'didot', serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+#app {
+    overflow-x: hidden;
+}
+
+.section {
+    padding: 60px 15px;
+}
+
+.section-header {
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-self: center;
+    width: 100%;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    max-width: 650px;
+}
+
+.section-header p, .lead {
+    font-size: 1.2rem;
+    max-width: 650px;
+    color: #666666;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--nav-bg-color) !important;
+    padding: 10px 30px;
+    transition: padding 0.3s ease-in-out;
+}
+.navbar.navbar-scrolled {
+    padding: 0px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.navbar-brand img {
+    max-height: 60px;
+    transition: max-height 0.3s ease-in-out;
+}
+.navbar.navbar-scrolled .navbar-brand img {
+    max-height: 45px;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: var(--nav-text-color);
+    font-weight: 700;
+    margin: 0 10px;
+}
+.navbar-light .navbar-toggler {
+    border-color: transparent;
+}
+.navbar-collapse {
+    padding: 15px;
+}
+.btn-donate {
+    background-color: var(--donate-color);
+    color: var(--primary-color);
+    font-weight: 700;
+    border-radius: 20px;
+    border: none;
+}
+.btn-donate:hover {
+    background-color: #a0d8f0;
+    color: var(--primary-color);
+}
+@media (max-width: 991px) {
+    .navbar-nav .btn-donate {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+
+/* Hero Section */
+.hero-section {
+    background-color: #ffffff;
+    color: #333333;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 100px 0 60px 0;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 100px 0 30px 0;
+    }
+    .section {
+        padding: 30px 0;
+    }
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    font-size: 1.6rem;
+    max-width: 500px;
+    color: #666666;
+}
+.hero-section p.section-lead-in {
+    font-size: 1rem;
+    font-style: italic;
+    color: #acacac;
+    margin-bottom: 0px;
+}
+
+.hero-section .btn {
+    margin-top: 15px;
+    margin-right: 15px;
+}
+.hero-image {
+    max-height: 450px;
+}
+
+/* New Callout Section */
+#callout {
+    background: linear-gradient(to right, rgba(13, 27, 42, 0.8), rgba(9, 19, 31, 0.95)), url('images/foreboding-police-officer.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Statistics */
+.statistic {
+    /* opacity: 0; */
+    transform: translateY(60px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    position: relative;
+    margin-bottom: 60px; /* Add space to prevent overlap */
+    overflow: hidden;
+}
+
+/* .statistic.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+} */
+.statistic .card {
+    background-color: var(--secondary-color);
+    border: none;
+    transition: transform 0.3s ease;
+    margin-top: 65px; /* Push card down to make room for h2 */
+    padding-top: 65px;
+}
+.statistic .card:hover {
+    transform: translateY(-20px);
+}
+.statistic .card h2 {
+    position: absolute;
+    top: -45px; /* Position 45px above the card */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 0;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    color: var(--primary-color);
+    display: flex;
+    min-width: 200px;
+    justify-content: flex-end;
+}
+
+.statistic .card h2 span {
+    display: inline-block;
+    min-width: 60px; /* Prevent layout shift during counting */
+}
+.statistic .card-link {
+    font-size: 0.9rem;
+    color: #d1d1d1;
+}
+
+/* Partners Section */
+#partners {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+}
+#partners h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+}
+.partners-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scrollbar-width: thin;
+}
+.partner-card {
+    flex: 0 0 200px;
+    margin-right: 20px;
+    background: transparent;
+    border: none;
+}
+.partner-card img {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+.partner-card:hover img {
+    filter: grayscale(0%);
+}
+
+/* New Partner Cards */
+.partner-card-new {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 30px 20px;
+}
+.partner-card-new:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.partner-logo-container {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.partner-logo {
+    max-height: 100px;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(20%);
+    transition: filter 0.3s ease;
+}
+.partner-card-new:hover .partner-logo {
+    filter: grayscale(0%);
+}
+.partner-card-new .card-title {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0;
+}
+
+/* Team Section */
+.team-member {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 0 15px;
+}
+.team-member img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid var(--accent-color);
+}
+.team-member p {
+    text-align: left;
+    line-height: 1.6;
+    color: #666666;
+    font-size: 0.95rem;
+}
+.team-member h4 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.team-member h5 {
+    margin-bottom: 20px;
+}
+
+/* Contact Section */
+#contact {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+}
+#contact h2, #contact h4 {
+    color: var(--light-color);
+}
+.form-control {
+    background-color: var(--accent-color);
+    border: none;
+    color: var(--light-color);
+}
+.form-control::placeholder {
+    color: #ced4da;
+}
+.form-control:focus {
+    background-color: #5A7E9D;
+    border-color: var(--light-color);
+    box-shadow: 0 0 0 0.2rem rgba(224, 225, 221, 0.25);
+}
+
+/* Modern Button */
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: #5A7E9D;
+}
+
+/* Company Bio Section */
+.company-bio-bg {
+    background-color: #ffffff;
+    color: #333333;
+}
+.company-bio-bg .section-header {
+    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.99)), url('../images/legal-books-silhouettes.jpg') no-repeat center;
+    background-size: cover;
+    padding: 40px 20px;
+    border-radius: 10px;
+    margin-bottom: 60px;
+}
+@media (max-width: 768px) {
+    .company-bio-bg .section-header {
+        background-position: 0 0;
+        background-size: contain;
+    }
+}
+.company-bio-bg .section-header h2 {
+    color: var(--primary-color);
+}
+.company-bio-bg p {
+    color: #555555;
+    line-height: 1.7;
+}
+.company-bio-bg h5 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+#company-bio .section {
+    padding: 20px 15px;
+}
+#company-bio .section-header {
+    padding: 100px 0 30px 0;
+    margin-bottom: 30px;
+}
+#company-bio .company-bio-content-inner {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: #10284d;
+    padding: 40px;
+}
+#company-bio .company-bio-content-inner h2 {
+    color: #ffffff;
+    text-align: left;
+}
+#company-bio .company-bio-content-inner p {
+    color: #c2c2c2;
+    text-align: left;
+}
+#company-bio p.lead {
+    max-width: 500px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #888787;
+    margin: 0 auto 30px auto;
+    text-align: center;
+}
+
+.use-case-col {
+    position: relative;
+}
+
+.use-case-icon {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    border: 3px solid #f8f9fa;
+}
+
+.use-case-card {
+    background-color: #f8f9fa;
+    border: none;
+    padding-top: 50px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.use-case-card h5 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.use-case-card ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.use-case-card li {
+    margin-bottom: 8px;
+    color: #555555;
+}
+
+/* App Overview Section */
+.cta-row {
+    gap: 15px;
+}
+
+.cta-row .form-control {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    color: #333333;
+}
+
+.cta-row .form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(65, 90, 119, 0.25);
+}
+
+.app-feature-item {
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.app-feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.app-feature-icon {
+    background-color: rgba(65, 90, 119, 0.1);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.app-feature-item h5 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.app-feature-item p {
+    color: #666666;
+    line-height: 1.6;
+}
+
+/* Other sections styling for light theme */
+.section {
+    background-color: #ffffff;
+    color: #333333;
+}
+.section h2, .section h3, .section h4 {
+    color: var(--primary-color);
+}
+
+/* Update about section for better contrast */
+#about {
+    background-color: #f8f9fa;
+    color: #333333;
+    padding-top: 100px; /* Extra padding for statistics positioning */
+    padding-bottom: 100px;
+}
+#about .section-header h2 {
+    color: var(--primary-color);
+}
+#about .section-header p {
+    color: #666666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        text-align: center;
+    }
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .hero-section p {
+        font-size: 1.3rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .section-header h2, h2 {
+        font-size: 2rem;
+    }
+}
+
+.app-page .app-hero {
+    background: linear-gradient(to right, rgba(13, 27, 42, 0.4), rgba(9, 19, 31, 0.95)), url('../images/dangerous-street.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.app-page .feature-card {
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.app-page .feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.app-page .persona-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.app-page .app-component {
+    background: #ffffff;
+    border-left: 4px solid var(--accent-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Hey Justice App - Stay Safe & Stay Informed</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/fonts.css">
+    <style>
+        @import url('https://use.typekit.net/fonts.css');
+    </style>
+
+    <!-- Required Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+
+    <!-- Custom Styles -->
+    <link type="text/css" rel="stylesheet" href="css/styles.css" />
+    
+    <!-- Required scripts -->
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app" class="app-page">
+        <b-navbar toggleable="lg" type="light" fixed="top" :class="{ 'navbar-scrolled': isScrolled }">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <b-navbar-brand href="index.html">
+                    <img src="images/justice-heart-balanced-logo-gold-removebg-preview.png" alt="Hey Justice Logo">
+                </b-navbar-brand>
+                <div class="d-flex align-items-center">
+                    <b-navbar-nav class="d-none d-lg-flex">
+                        <b-nav-item href="app.html">The App</b-nav-item>
+                        <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'" @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
+                    </b-navbar-nav>
+                    <b-navbar-nav>
+                        <b-nav-item class="d-none d-lg-block ml-3">
+                            <form action="https://www.paypal.com/donate" method="post" target="_top">
+                                <input type="hidden" name="hosted_button_id" value="LVAHR6S3GM2BC" />
+                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+                                    border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
+                                    alt="Donate with PayPal button" />
+                                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
+                                    height="1" />
+                            </form>
+                            <!-- <b-button href="index.html#donations" class="btn-donate">Donate</b-button> -->
+                        </b-nav-item>
+                        <b-navbar-toggle target="nav-collapse" class="d-lg-none"></b-navbar-toggle>
+                    </b-navbar-nav>
+                </div>
+            </div>
+            <b-collapse id="nav-collapse" is-nav>
+                <b-navbar-nav class="d-lg-none">
+                    <b-nav-item href="app.html">The App</b-nav-item>
+                    <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'" @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
+                    <b-nav-item>
+                        <form action="https://www.paypal.com/donate" method="post" target="_top">
+                            <input type="hidden" name="hosted_button_id" value="LVAHR6S3GM2BC" />
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+                                border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
+                                alt="Donate with PayPal button" />
+                            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
+                                height="1" />
+                        </form>
+                        <!-- <b-button href="index.html#donations" class="btn-donate w-100 mt-2">Donate</b-button> -->
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <!-- Hero Section -->
+        <section id="hero" class="app-hero">
+            <b-container>
+                <b-row align-v="center">
+                    <b-col md="6">
+                        <!-- Space for potential image or graphic -->
+                    </b-col>
+                    <b-col md="6" class="text-white p-4 p-md-0">
+                        <h1 class="display-4 font-weight-bold mb-4 p-4 p-md-0">Bad things can happen to good people.</h1>
+                        <p class="lead mb-4 text-white d-none d-md-block">Hey Justice helps alert loved ones when you feel threatened, so you don't have to face it alone.</p>
+                        <p class="lead mb-4 text-white d-block d-md-none p-4">You don't have to face it alone.</p>
+                        <!-- <div>
+                            <b-button variant="light" size="lg" class="mr-3" @click="scrollTo('features')">Learn More</b-button>
+                            <b-button variant="outline-light" size="lg" @click="scrollTo('early-access')">Join Waitlist</b-button>
+                        </div> -->
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <!-- Target Users Section -->
+        <section id="users" class="section bg-light">
+            <b-container>
+                <div class="section-header">
+                    <h2>Who We Serve</h2>
+                    <p class="lead">Hey Justice is designed for individuals and families who need accessible legal support and safety tools.</p>
+                </div>
+                <b-row>
+                    <b-col v-for="persona in userPersonas" :key="persona.id" md="6" lg="3" class="mb-4">
+                        <b-card class="persona-card h-100">
+                            <div class="text-center mb-3">
+                                <b-icon :icon="persona.icon" font-scale="3" variant="secondary"></b-icon>
+                            </div>
+                            <h5 class="text-center font-weight-bold">{{ persona.title }}</h5>
+                            <p class="small">{{ persona.description }}</p>
+                            <ul class="small">
+                                <li v-for="need in persona.needs" :key="need">{{ need }}</li>
+                            </ul>
+                        </b-card>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <!-- App Features Section -->
+        <section id="features" class="section">
+            <b-container>
+                <div class="section-header">
+                    <h2>Powerful Features for Your Safety & Legal Needs</h2>
+                    <p class="lead">Our app provides comprehensive tools to help you navigate legal challenges and stay safe in threatening situations.</p>
+                </div>
+                <b-row>
+                    <b-col v-for="feature in appFeatures" :key="feature.id" md="6" lg="4" class="mb-4">
+                        <b-card class="feature-card">
+                            <div class="text-center mb-3">
+                                <b-icon :icon="feature.icon" font-scale="2.5" variant="secondary"></b-icon>
+                            </div>
+                            <h5 class="font-weight-bold">{{ feature.title }}</h5>
+                            <p>{{ feature.description }}</p>
+                        </b-card>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <!-- App Components Section -->
+        <section id="app-components" class="section bg-light">
+            <b-container>
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p class="lead">Hey Justice keeps you informed, prepared, and protected. Get timely legal guidance, set up emergency alerts, and stay connected with trusted contacts all in one simple app.</p>
+                </div>
+                <b-row class="d-flex align-items-center justify-content-center">
+                    <img src="images/i-feel-unsafe-button-flow.png" class="img-fluid rounded" alt="App Interface Preview" style="max-width:650px;">
+                </b-row>
+                <b-row>
+                    <b-col md="8" class="mx-auto">
+                        <div v-for="component in appComponents" :key="component.id" class="app-component">
+                            <h5 class="font-weight-bold text-primary">{{ component.title }}</h5>
+                            <p>{{ component.description }}</p>
+                            <ul v-if="component.features">
+                                <li v-for="feat in component.features" :key="feat" class="small">{{ feat }}</li>
+                            </ul>
+                        </div>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <!-- Early Access Section -->
+        <section id="early-access" class="section">
+            <b-container>
+                <div class="section-header">
+                    <h2>Be Among the First to Access Hey Justice</h2>
+                    <p class="lead">Join our waitlist to get early access to the app and help us build features that matter most to you.</p>
+                </div>
+                <b-row align-v="center">
+                    
+                    <b-col class="col-md-6 offset-md-3">
+                        <b-card>
+                            <h4 class="text-dark">Join the Waitlist</h4>
+                            <p class="text-dark">Get notified when the app launches and receive exclusive early access.</p>
+                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSee3AsdjpoQDSuvwRMaxsxaZqt2wxcnMEVg8sswgWQYpMeaVg/viewform?embedded=true" width="440" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                            
+                        </b-card>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <section id="contact" class="section">
+            <b-container>
+                <div class="section-header">
+                    <h2>Contact Us</h2>
+                </div>
+                <b-row>
+                    <b-col md="6" class="mb-4 mb-md-0">
+                        <!-- <h4>Follow us on social media:</h4>
+                        <p>
+                            <a href="#" class="text-white mr-3">Facebook</a>
+                            <a href="#" class="text-white mr-3">Twitter</a>
+                            <a href="#" class="text-white mr-3">Snapchat</a>
+                            <a href="#" class="text-white">YouTube</a>
+                        </p> -->
+                    </b-col>
+                    <b-col md="6">
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSePxf8Wh8qaku3rTuQFKjcKrECSoDlLWQ8Hdo1hU0e-MUiXpA/viewform?embedded=true" width="640" height="1284" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <footer class="text-center p-4" style="background-color: var(--primary-color); color: var(--light-color);">
+            <p>&copy;2025 Hey Justice - <a href="index.html" class="text-light">Back to Home</a></p>
+        </footer>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isScrolled: false,
+                navItems: [
+                    { id: 'partners', text: 'Partners', url: 'index.html#partners' },
+                    { id: 'team', text: 'Team', url: 'index.html#team' },
+                    { id: 'contact', text: 'Contact', url: 'app.html#contact' }
+                ],
+                userPersonas: [
+                    {
+                        id: 1,
+                        title: 'Individuals Facing Charges',
+                        icon: 'person-badge',
+                        description: 'diverse communties of people facing criminal and civil charges.',
+                        needs: [
+                            'Court date reminders',
+                            'Help understanding legal documents', 
+                            'Safety tools for police interactions',
+                            'Affordable legal representation'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'Immigrants & Families',
+                        icon: 'people',
+                        description: 'People navigating both criminal and immigration legal systems.',
+                        needs: [
+                            'Deportation risk assessment',
+                            'Plain-language explanations',
+                            'Family support resources',
+                            'Cultural sensitivity'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'Mobile & Unstable Housing',
+                        icon: 'phone',
+                        description: 'Highly mobile users with limited internet access.',
+                        needs: [
+                            'Mobile-based notifications',
+                            'Offline functionality',
+                            'AI guidance when needed',
+                            'Emergency contact systems'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'Family Members & Caregivers',
+                        icon: 'heart',
+                        description: 'Family members helping loved ones with legal requirements.',
+                        needs: [
+                            'Simple progress tracking',
+                            'Emergency notifications',
+                            'Resource sharing',
+                            'Support coordination'
+                        ]
+                    }
+                ],
+                appFeatures: [
+                    {
+                        id: 1,
+                        title: '"Hey Justice" Button',
+                        icon: 'exclamation-triangle',
+                        description: 'Instant emergency alerts to trusted contacts with location sharing and audio recording capabilities.'
+                    },
+                    {
+                        id: 2,
+                        title: 'Legal Document Scanner',
+                        icon: 'file-text',
+                        description: 'Capture and analyze legal documents with AI-powered translation and deadline detection.'
+                    },
+                    {
+                        id: 3,
+                        title: 'Emergency Contacts',
+                        icon: 'telephone',
+                        description: 'Set up trusted emergency contacts who will receive alerts and your live location if you encounter a high-risk situation, so they can respond quickly.'
+                    },
+                    {
+                        id: 4,
+                        title: 'Lawyer Finder',
+                        icon: 'briefcase',
+                        description: 'Connect with qualified, affordable legal representation in your area and practice needs.'
+                    },
+                    {
+                        id: 5,
+                        title: 'Court Reminders',
+                        icon: 'calendar',
+                        description: 'Never miss important dates with automated reminders and calendar integration.'
+                    },
+                    {
+                        id: 6,
+                        title: 'Live Audio Streaming',
+                        icon: 'mic',
+                        description: 'Stream live audio during emergencies to provide real-time documentation and evidence.'
+                    }
+                ],
+                appComponents: [
+                    {
+                        id: 1,
+                        title: 'Safety First: Emergency Response System',
+                        description: 'The core safety feature includes an "Hey Justice" button with customizable countdown timers and emergency contact notifications.',
+                        features: [
+                            'Situation-specific alerts (physically unsafe, being followed, pulled over, etc.)',
+                            'Live audio streaming with external viewing page',
+                            'False alarm prevention and cancellation options'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'Legal Document Intelligence',
+                        description: 'AI-powered document analysis that extracts key information and translates complex legal language.',
+                        features: [
+                            'Photo capture of multiple document pages',
+                            'Text extraction and GPT analysis',
+                            'Summary and translation in English and Spanish',
+                            'Automatic deadline detection and calendar integration'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'Emergency Contact Management',
+                        description: 'Comprehensive contact system with verification and notification preferences.',
+                        features: [
+                            'SMS confirmation for new contacts',
+                            'Primary contact designation',
+                            'Language preference settings',
+                            'Cross-notification between contacts'
+                        ]
+                    },
+                ]
+            },
+            methods: {
+                handleScroll() {
+                    this.isScrolled = window.scrollY > 50;
+                },
+                scrollTo(id) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        // Close the navbar collapse on click
+                        const navbar = document.getElementById('nav-collapse');
+                        if (navbar && $(navbar).hasClass('show')) {
+                            $(navbar).collapse('hide');
+                        }
+                        $('html, body').animate({
+                            scrollTop: $(element).offset().top - 70
+                        }, 800);
+                    }
+                }
+            },
+            mounted() {
+                window.addEventListener('scroll', this.handleScroll);
+                this.handleScroll();
+            },
+            beforeDestroy() {
+                window.removeEventListener('scroll', this.handleScroll);
+            }
+        });
+    </script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+</body>
+
+</html>

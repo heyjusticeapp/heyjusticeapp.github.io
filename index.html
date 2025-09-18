@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Hey Justice</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/fonts.css">
+    <style>
+        @import url('https://use.typekit.net/fonts.css');
+    </style>
+
+    <!-- Required Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+
+    <!-- Custom Styles -->
+    <link type="text/css" rel="stylesheet" href="css/styles.css" />
+
+    <!-- Required scripts -->
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app" class="home-page">
+        <b-navbar toggleable="lg" type="light" fixed="top" :class="{ 'navbar-scrolled': isScrolled }">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <b-navbar-brand href="#" @click.prevent="scrollTo('hero')">
+                    <img src="images/justice-heart-balanced-logo-gold-removebg-preview.png" alt="Hey Justice Logo">
+                </b-navbar-brand>
+                <div class="d-flex align-items-center">
+                    <b-navbar-nav class="d-none d-lg-flex">
+                        <b-nav-item href="app.html">The App</b-nav-item>
+                        <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'"
+                            @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
+                    </b-navbar-nav>
+                    <b-navbar-nav>
+                        <b-nav-item class="d-none d-lg-block ml-3">
+                            <form action="https://www.paypal.com/donate" method="post" target="_top">
+                                <input type="hidden" name="hosted_button_id" value="LVAHR6S3GM2BC" />
+                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+                                    border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
+                                    alt="Donate with PayPal button" />
+                                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
+                                    height="1" />
+                            </form>
+
+                            <!-- <b-button @click="scrollTo('donations')" class="btn-donate">Donate</b-button> -->
+                        </b-nav-item>
+                        <b-navbar-toggle target="nav-collapse" class="d-lg-none"></b-navbar-toggle>
+                    </b-navbar-nav>
+                </div>
+            </div>
+            <b-collapse id="nav-collapse" is-nav>
+                <b-navbar-nav class="d-lg-none">
+                    <b-nav-item href="app.html">The App</b-nav-item>
+                    <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'"
+                        @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
+                    <b-nav-item>
+                        <form action="https://www.paypal.com/donate" method="post" target="_top">
+                            <input type="hidden" name="hosted_button_id" value="LVAHR6S3GM2BC" />
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+                                border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
+                                alt="Donate with PayPal button" />
+                            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
+                                height="1" />
+                        </form>
+                        <!-- <b-button @click="scrollTo('donations')" class="btn-donate w-100 mt-2">Donate</b-button> -->
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <div id="hero" class="hero-section">
+            <b-container>
+                <b-row align-v="center">
+                    <b-col class="d-flex justify-content-center col-6 offset-3 col-md-4 offset-md-0">
+                        <img src="images/lady-justice-grey.png" class="img-fluid hero-image" alt="Lady Justice">
+                    </b-col>
+                    <b-col md="8">
+                        <!-- <p class="section-lead-in d-none d-md-block">Justice is not just a concept. It's a tool that people can use.</p>
+                         -->
+                        <h1>Hey Justice!</h1>
+                        <p>A Legal App that puts an advocate in your pocket.</p>
+                        <div>
+                            <b-button href="app.html" variant="primary" size="lg">About the app</b-button>
+                            <b-button href="index.html#team" variant="outline-secondary" size="lg">Meet the
+                                team</b-button>
+                        </div>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </div>
+
+        <section id="company-bio" class="section company-bio-bg">
+            <b-container>
+                <div class="section-header">
+
+                    <div class="company-bio-content row">
+                        <div class="text-center mb-5 col-md-5">
+                            <img src="images/justice-heart-balanced-logo-gold-removebg-preview.png" alt="Hey Justice Logo"
+                                class="img-fluid  p-2 p-md-0" style="max-width: 100%;">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="company-bio-content-inner">
+                                <h2 class="text-left">Introducing</h2>
+                                <p class="text-left"><b>Our Mission:</b> Hey Justice empowers diverse communities
+                                    with accessible, culturally fluent legal support through smart mobile first
+                                    technology. Making justice not just a concept, but a tool people can use. </p>
+                                <p class="text-left"><b>Our Purpose:</b> Hey Justice bridges legal access gaps,
+                                    humanizes technology, and helps diverse communities navigate the law.</p>
+                                <b-button href="index.html#team" variant="secondary" size="lg" class="text-left">Learn
+                                    more</b-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <b-row class="mb-5 mt-md-5 pt-md-4">
+                    <b-col md="4" class="mb-4 use-case-col">
+                        <div class="use-case-icon">
+                            <b-icon-person font-scale="3" variant="secondary"></b-icon-person>
+                        </div>
+                        <b-card class="use-case-card h-100">
+                            <h5 class="text-center">For Individuals</h5>
+                            <ul class="text-left">
+                                <li>Understand legal documents in plain language</li>
+                                <li>Track court dates with automated reminders</li>
+                                <li>Connect with affordable lawyers</li>
+                                <li>Access safety tools for police interactions</li>
+                            </ul>
+                        </b-card>
+                    </b-col>
+                    <b-col md="4" class="mb-4 use-case-col">
+                        <div class="use-case-icon">
+                            <b-icon-people font-scale="3" variant="secondary"></b-icon-people>
+                        </div>
+                        <b-card class="use-case-card h-100">
+                            <h5 class="text-center">For Communities</h5>
+                            <ul class="text-left">
+                                <li>Reduces barriers to legal representation</li>
+                                <li>Prevents missed court dates and confusion</li>
+                                <li>Builds confidence in justice system engagement</li>
+                                <li>Keeps loved ones informed about safety</li>
+                            </ul>
+                        </b-card>
+                    </b-col>
+                    <b-col md="4" class="mb-4 use-case-col">
+                        <div class="use-case-icon">
+                            <b-icon-briefcase font-scale="3" variant="secondary"></b-icon-briefcase>
+                        </div>
+                        <b-card class="use-case-card h-100">
+                            <h5 class="text-center">For Partners</h5>
+                            <ul class="text-left">
+                                <li>Scale support to serve more clients efficiently</li>
+                                <li>Extend outreach to diverse communities</li>
+                                <li>Streamline case management processes</li>
+                                <li>Enhance client communication and follow-up</li>
+                            </ul>
+                        </b-card>
+                    </b-col>
+                </b-row>
+
+            </b-container>
+        </section>
+
+        <section id="about" class="section">
+            <b-container>
+                <div class="section-header" style="margin-bottom: 10px;">
+                    <h2>Why Hey Justice?</h2>
+                    <p class="lead">Hey Justice gives people the tools, guidance, and confidence to navigate the legal system.
+                        Understand their rights, and protect themselves. We help make the law clear, accessible, and
+                        culturally fluent so everyone can face legal challenges with knowledge and support.</p>
+                    <div>
+                        <b-button href="index.html#contact" variant="primary" size="lg">Partner with us</b-button>
+                    </div>
+                </div>
+                <b-row class="justify-content-center">
+                    <b-col v-for="(stat, index) in statistics" :key="index" md="6" lg="5" class="mb-4 statistic">
+                        <b-card class="text-white text-center h-100">
+                            <h2 class="display-1 font-weight-bold"><span :id="'countup-' + index">{{ stat.animated ?
+                                    stat.endVal : 0 }}</span>{{ stat.suffix }}</h2>
+                            <p class="lead text-white">{{ stat.description }}</p>
+                            <a :href="stat.source" target="_blank" class="card-link">Source</a>
+                        </b-card>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+
+
+        <section id="app-overview" class="section">
+            <b-container>
+                <div class="section-header">
+                    <h2>We're creating an app to help</h2>
+                    <p class="lead">Hey Justice! is an app that makes justice more accessible, clear, and culturally
+                        relevant for diverse communities.</p>
+                    <div class="cta-row d-flex flex-wrap justify-content-center align-items-center">
+                        <b-button href="app.html" variant="primary" size="lg" class="mr-3 mb-2">Learn more</b-button>
+                        <!-- <b-form @submit.prevent class="d-flex align-items-center mb-2">
+                            <b-input-group>
+                                <b-form-input type="email" placeholder="Enter your email" style="min-width: 250px;"></b-form-input>
+                                <b-input-group-append>
+                                    <b-button type="submit" variant="secondary">Subscribe</b-button>
+                                </b-input-group-append>
+                            </b-input-group>
+                        </b-form> -->
+                    </div>
+                </div>
+                <b-row class="justify-content-center">
+                    <b-col v-for="feature in appOverviewFeatures" :key="feature.id" md="6" lg="4"
+                        class="mb-4 text-center">
+                        <div class="app-feature-item">
+                            <div class="app-feature-icon mb-3">
+                                <b-icon :icon="feature.icon" font-scale="2.5" variant="secondary"></b-icon>
+                            </div>
+                            <h5>{{ feature.title }}</h5>
+                            <p>{{ feature.description }}</p>
+                        </div>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <!-- <section id="partners" class="section">
+            <b-container>
+                <div class="section-header">
+                    <h2>Our Partners and Affiliates</h2>
+                    <p class="lead">We're building a coalition of organizations committed to justice equity and legal
+                        accessibility. Join us in creating systemic change by partnering with Hey Justice to expand
+                        legal resources and support for underserved communities nationwide.</p>
+                    <div>
+                        <b-button variant="primary">Get Involved</b-button>
+                        <b-button variant="success">Donate</b-button>
+                    </div>
+                </div>
+                <h3>Our Partners</h3>
+                <b-row class="justify-content-center">
+                    <b-col v-for="partner in partners" :key="partner.name" md="4" lg="3" class="mb-4">
+                        <b-card class="partner-card-new h-100 text-center">
+                            <div class="partner-logo-container">
+                                <img :src="partner.image" :alt="partner.name" class="img-fluid partner-logo">
+                            </div>
+                            <b-card-title class="mt-3">{{ partner.name }}</b-card-title>
+                        </b-card>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section> -->
+
+        <section id="donations" class="section bg-light text-dark">
+            <b-container>
+                <div class="section-header">
+                    <h2>Invest in change</h2>
+                    <p class="lead">Keep Hey Justice running and accessible so you can get timely legal guidance, reminders, and tools when you need them most. Any contribution helps us stay here for you.</p>
+                </div>
+                <b-row align-v="start">
+                    <!-- <b-col md="6" class="mb-4 mb-md-0">
+                        <h4>Target Funding Organizations</h4>
+                        <p>We're actively seeking funding from select social justice organizations like these</p>
+                        <ul class="list-group">
+                            <li v-for="org in targetOrgs" :key="org" class="list-group-item">{{ org }}</li>
+                        </ul>
+                    </b-col> -->
+                    <b-col class="col-md-6 offset-md-3">
+                        <b-card>
+                            <h4>Support the cause</h4>
+                            <p class="lead">Keep Hey Justice at your fingertips, get the guidance, tools, and
+                                reminders you rely on. Support us with a one time or recurring contribution.</p>
+                            <!-- <b-button variant="success" size="lg" block>Donate Now</b-button> -->
+                            <div id="donate-button-container">
+                                <div id="donate-button"></div>
+                                <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js"
+                                    charset="UTF-8"></script>
+                                <script>
+                                    PayPal.Donation.Button({
+                                        env: 'production',
+                                        hosted_button_id: 'NXYEN3LAX8NGE',
+                                        image: {
+                                            src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
+                                            alt: 'Donate with PayPal button',
+                                            title: 'PayPal - The safer, easier way to pay online!',
+                                        }
+                                    }).render('#donate-button');
+                                </script>
+                            </div>
+
+                        </b-card>
+
+                        <b-card class="mt-2">
+                            <h4 class="text-dark">Join the Waitlist</h4>
+                            <p class="text-dark">Get notified when the app launches and receive exclusive early access.</p>
+                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSee3AsdjpoQDSuvwRMaxsxaZqt2wxcnMEVg8sswgWQYpMeaVg/viewform?embedded=true" width="440" height="540" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                            
+                        </b-card>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <section id="team" class="section">
+            <b-container>
+                <div class="section-header">
+                    <h2>Meet The Founders</h2>
+
+                </div>
+                <b-row class="justify-content-center">
+                    <b-col v-for="founder in founders" :key="founder.name" md="6" lg="5" class="team-member p-2">
+                        <img :src="founder.image" :alt="founder.name">
+                        <h4>{{ founder.name }}</h4>
+                        <h5 class="text-muted">{{ founder.title }}</h5>
+                        <div class="founder-socials d-flex align-items-center justify-content-center mb-3">
+                            <span v-for="social in founder.socials">
+                                <a v-if='social.service == "linkedin"' :href="social.link" target="_blank">
+                                    <b-icon-linkedin font-scale="2" variant="secondary"></b-icon-linkedin>
+                                </a>
+                            </span>
+                        </div>
+                        <p>{{ founder.bio }}</p>
+                    </b-col>
+                </b-row>
+                <!-- <div class="text-center mt-4">
+                    <b-button variant="primary" size="lg">Get Involved</b-button>
+                </div> -->
+            </b-container>
+        </section>
+
+        <section id="contact" class="section">
+            <b-container>
+                <div class="section-header">
+                    <h2>Contact Us</h2>
+                    <p class="lead text-white">Need guidance, have questions, or want to share
+                        feedback? Connect with the Hey Justice team, we're here to support you. Your message helps us
+                        improve the tools and resources that keep you informed, prepared, and protected.</p>
+                </div>
+                <b-row>
+                    <b-col md="5" class="mb-4 mb-md-0">
+                        <!-- <h4>Follow us on social media:</h4>
+                        <p>
+                            <a href="#" class="text-white mr-3">Facebook</a>
+                            <a href="#" class="text-white mr-3">Twitter</a>
+                            <a href="#" class="text-white mr-3">Snapchat</a>
+                            <a href="#" class="text-white">YouTube</a>
+                        </p> -->
+                    </b-col>
+                    <b-col md="7">
+                        <iframe
+                            src="https://docs.google.com/forms/d/e/1FAIpQLSePxf8Wh8qaku3rTuQFKjcKrECSoDlLWQ8Hdo1hU0e-MUiXpA/viewform?embedded=true"
+                            width="540" height="1284" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <footer class="text-center p-4" style="background-color: var(--primary-color); color: var(--light-color);">
+            <p>&copy;2025 Hey Justice - <a href="app.html" class="text-light">View App Features</a></p>
+        </footer>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isScrolled: false,
+                navItems: [
+                    { id: 'partners', text: 'Partners', url: 'index.html#partners' },
+                    { id: 'team', text: 'Team', url: 'index.html#team' },
+                    { id: 'contact', text: 'Contact', url: 'index.html#contact' }
+                ],
+                statistics: [
+                    { startVal: 0, endVal: 92, suffix: '%', description: 'of low-income Americans receive little to no legal help.', source: 'https://justicegap.lsc.gov/resource/executive-summary/', animated: false },
+                    { startVal: 0, endVal: 50, suffix: '%', description: 'of people who don\'t seek legal help cite cost as a barrier.', source: 'https://justicegap.lsc.gov/resource/executive-summary/', animated: false },
+                    { startVal: 0, endVal: 20, suffix: '%', description: 'more black drivers are stopped than white drivers.', source: 'https://naacp.org/resources/criminal-justice-fact-sheet', animated: false },
+                    { startVal: 0, endVal: 26, suffix: '%', description: 'reduction in missing court dates with text message reminders.', source: 'https://www.povertyactionlab.org/evaluation/text-message-reminders-decreased-failure-appear-court-new-york-city?lang=fr', animated: false }
+                ],
+                partners: [
+                    { name: 'North Carolina A&T State University', image: 'images/partners-north-carolina-at-logo.webp' },
+                    { name: 'North Carolina Central University Law School', image: 'images/partners-north-carolina-central-university-law-school.webp' }
+                ],
+                appFeatures: [
+                    "Simplified legal documents translated into plain English or culturally fluent language.",
+                    "Court date reminders and updates so users never miss important deadlines.",
+                    "Affordable lawyer connections to expand access to trusted legal support.",
+                    "Safety tools, such as voice-activated recording during police stops and emergency alerts.",
+                    "Record-clearing assistance to guide users through expungement and other post-conviction processes."
+                ],
+                appOverviewFeatures: [
+                    {
+                        id: 1,
+                        icon: 'file-text',
+                        title: 'Legal Document Help',
+                        description: 'Translate complex legal documents into plain, understandable language.'
+                    },
+                    {
+                        id: 2,
+                        icon: 'calendar-check',
+                        title: 'Court Date Reminders',
+                        description: 'Never miss important deadlines with automated reminders and updates.'
+                    },
+                    {
+                        id: 3,
+                        icon: 'shield-check',
+                        title: 'Safety Tools',
+                        description: 'Voice-activated recording and emergency alerts for police interactions.'
+                    },
+                ],
+                targetOrgs: [
+                    "Black Tech Nation Ventures",
+                    "Fearless Fund",
+                    "NAACP Venture capital fund",
+                    "NAACP Legal Defense Fund",
+                    "Immigration Defense Project"
+                ],
+                founders: [
+                    {
+                        name: 'Danielle Bunker',
+                        title: 'CEO & Founder',
+                        image: 'images/home-bio-photo-danielle-bunkler.jpg',
+                        socials: [{service: 'linkedin', link: 'https://www.linkedin.com/in/danielle-bunker-5349a0311/'}],
+                        bio: 'Danielle Bunker is the CEO and Founder of Hey Justice, a legal tech startup dedicated to making legal aid more accessible and culturally fluent for diverse communities. With a background in political science and leadership across student and community organizations, Danielle brings both strategic vision and lived perspective to the work. She has led Hey Justice from concept to an emerging platform that simplifies legal processes into culturally fluent language and provides safety tools that alert trusted contacts during high stakes encounters.'
+                    },
+                    {
+                        name: 'David Bunker',
+                        title: 'COO & Founder',
+                        image: 'images/home-bio-photo-david-bunker.jpg',
+                        socials: [{service: 'linkedin', link: 'https://www.linkedin.com/in/david-bunker-74538526b/'}],
+                        bio: 'David Bunker is the COO of Hey Justice, a legal tech startup dedicated to making legal aid more accessible and user-friendly for diverse communities. With a background in cybersecurity and information technology, David brings strategic vision and operational expertise to the team, overseeing business operations, platform development, and cross-functional coordination. He has been instrumental in scaling Hey Justice from concept to an emerging platform that integrates AI-driven tools and safety features for users. David is passionate about building systems and processes that drive innovation, efficiency, and impact in the legal tech space.'
+                    }
+                ]
+            },
+            methods: {
+                handleScroll() {
+                    this.isScrolled = window.scrollY > 50;
+                    this.animateStatistics();
+                },
+                animateStatistics() {
+                    const statistics = document.querySelectorAll('.statistic');
+                    statistics.forEach((stat, index) => {
+                        const rect = stat.getBoundingClientRect();
+                        if (rect.top < window.innerHeight - 100 && rect.bottom >= 0 && !this.statistics[index].animated) {
+                            this.statistics[index].animated = true;
+                            this.animateNumber(index, this.statistics[index].endVal);
+                        }
+                    });
+                },
+                animateNumber(index, endValue) {
+                    const element = document.getElementById('countup-' + index);
+                    if (!element) return;
+
+                    // Make duration proportional to the value (minimum 1 second, maximum 3 seconds)
+                    const baseDuration = 1000; // 1 second base
+                    const maxDuration = 3000; // 3 seconds max
+                    const duration = Math.min(baseDuration + (endValue * 20), maxDuration);
+
+                    const startTime = performance.now();
+                    const startValue = 0;
+
+                    const animate = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+
+                        // Easing function (ease-out)
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+
+                        const currentValue = Math.floor(startValue + (endValue - startValue) * easeOut);
+                        element.textContent = currentValue;
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            element.textContent = endValue; // Ensure final value is exact
+                        }
+                    };
+
+                    requestAnimationFrame(animate);
+                },
+                scrollTo(id) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        // Close the navbar collapse on click
+                        const navbar = document.getElementById('nav-collapse');
+                        if (navbar && $(navbar).hasClass('show')) {
+                            $(navbar).collapse('hide');
+                        }
+                        $('html, body').animate({
+                            scrollTop: $(element).offset().top - 70
+                        }, 800);
+                    }
+                }
+            },
+            mounted() {
+                window.addEventListener('scroll', this.handleScroll);
+                this.handleScroll();
+            },
+            beforeDestroy() {
+                window.removeEventListener('scroll', this.handleScroll);
+            }
+        });
+    </script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+</body>
+
+</html>
