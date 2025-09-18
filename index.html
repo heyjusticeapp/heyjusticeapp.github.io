@@ -25,8 +25,15 @@
     <meta property="twitter:description" content="Hey Justice gives people the tools, guidance, and confidence to navigate the legal system, understand their rights and protect themselves." />
     <meta property="twitter:image" content="https://heyjusticeapp.github.io/images/justice-heart-social-preview.jpg" />
 
-<!-- Meta Tags Generated with https://metatags.io -->
-    <title>Hey Justice</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZVYY5KHX6"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GZVYY5KHX6');
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +71,6 @@
                 </b-navbar-brand>
                 <div class="d-flex align-items-center">
                     <b-navbar-nav class="d-none d-lg-flex">
-                        <b-nav-item href="app.html">The App</b-nav-item>
                         <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'"
                             @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
                     </b-navbar-nav>
@@ -87,7 +93,6 @@
             </div>
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav class="d-lg-none">
-                    <b-nav-item href="app.html">The App</b-nav-item>
                     <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'"
                         @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
                     <b-nav-item>
@@ -105,7 +110,7 @@
             </b-collapse>
         </b-navbar>
 
-        <div id="hero" class="hero-section">
+        <section id="hero" class="hero-section">
             <b-container>
                 <b-row align-v="center">
                     <b-col class="d-flex justify-content-center col-6 offset-3 col-md-4 offset-md-0">
@@ -114,9 +119,9 @@
                     <b-col md="8">
                         <!-- <p class="section-lead-in d-none d-md-block">Justice is not just a concept. It's a tool that people can use.</p>
                          -->
-                        <h1>Hey Justice!</h1>
-                        <p>A Legal App that puts an advocate in your pocket.</p>
-                        <div>
+                         <h1>Hey Justice!</h1>
+                         <p>A Legal App that puts an advocate in your pocket.</p>
+                         <div>
                             <b-button href="app.html" variant="primary" size="lg">About the app</b-button>
                             <b-button href="index.html#team" variant="outline-secondary" size="lg">Meet the
                                 team</b-button>
@@ -124,7 +129,7 @@
                     </b-col>
                 </b-row>
             </b-container>
-        </div>
+        </section>
 
         <section id="company-bio" class="section company-bio-bg">
             <b-container>
@@ -220,8 +225,6 @@
                 </b-row>
             </b-container>
         </section>
-
-
 
         <section id="app-overview" class="section">
             <b-container>
@@ -397,6 +400,7 @@
             data: {
                 isScrolled: false,
                 navItems: [
+                    { id: 'app', text: "The App", url: 'app.html'},
                     { id: 'partners', text: 'Partners', url: 'index.html#partners' },
                     { id: 'team', text: 'Team', url: 'index.html#team' },
                     { id: 'contact', text: 'Contact', url: 'index.html#contact' }

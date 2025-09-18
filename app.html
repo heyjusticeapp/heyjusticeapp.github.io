@@ -24,6 +24,16 @@
     <meta property="twitter:title" content="Hey Justice App - Stay Safe & Stay Informed" />
     <meta property="twitter:description" content="Hey Justice gives people the tools, guidance, and confidence to navigate the legal system, understand their rights and protect themselves." />
     <meta property="twitter:image" content="https://heyjusticeapp.github.io/images/justice-heart-social-preview.jpg" />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZVYY5KHX6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GZVYY5KHX6');
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +69,6 @@
                 </b-navbar-brand>
                 <div class="d-flex align-items-center">
                     <b-navbar-nav class="d-none d-lg-flex">
-                        <b-nav-item href="app.html">The App</b-nav-item>
                         <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'" @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav>
@@ -80,7 +89,6 @@
             </div>
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav class="d-lg-none">
-                    <b-nav-item href="app.html">The App</b-nav-item>
                     <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'" @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
                     <b-nav-item>
                         <form action="https://www.paypal.com/donate" method="post" target="_top">
@@ -239,8 +247,10 @@
             el: '#app',
             data: {
                 isScrolled: false,
+                
                 navItems: [
-                    { id: 'partners', text: 'Partners', url: 'index.html#partners' },
+                    { id: 'app', text: "The App", url: 'app.html'},
+                    { id: 'partners', text: "Partners", url: 'index.html#partners' },
                     { id: 'team', text: 'Team', url: 'index.html#team' },
                     { id: 'contact', text: 'Contact', url: 'app.html#contact' }
                 ],
