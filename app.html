@@ -24,16 +24,6 @@
     <meta property="twitter:title" content="Hey Justice App - Stay Safe & Stay Informed" />
     <meta property="twitter:description" content="Hey Justice gives people the tools, guidance, and confidence to navigate the legal system, understand their rights and protect themselves." />
     <meta property="twitter:image" content="https://heyjusticeapp.github.io/images/justice-heart-social-preview.jpg" />
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZVYY5KHX6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-GZVYY5KHX6');
-    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,6 +34,54 @@
     <link rel="stylesheet" href="https://use.typekit.net/fonts.css">
     <style>
         @import url('https://use.typekit.net/fonts.css');
+        
+        /* Iframe styling for all screen sizes */
+        #waitlist-iframe-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        
+        #waitlist-iframe {
+            display: block;
+            margin: 0 auto;
+            max-width: 440px;
+        }
+        
+        /* Custom responsive styles for iframes */
+        @media (max-width: 767.98px) {
+            /* Remove padding and margin for waitlist iframe */
+            #waitlist-iframe {
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+            
+            /* Remove padding and margin for contact form iframe */
+            #contact-form-iframe {
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+            
+            /* Remove padding from parent containers */
+            #contact-form-iframe-container,
+            #waitlist-iframe-container {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            
+            /* Adjust card padding on mobile */
+            .mobile-no-padding {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
     </style>
 
     <!-- Required Stylesheets -->
@@ -57,6 +95,9 @@
     <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- PayPal Donation SDK -->
+    <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
 
 </head>
 
@@ -69,18 +110,14 @@
                 </b-navbar-brand>
                 <div class="d-flex align-items-center">
                     <b-navbar-nav class="d-none d-lg-flex">
+                        <b-nav-item href="app.html">The App</b-nav-item>
                         <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'" @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav>
                         <b-nav-item class="d-none d-lg-block ml-3">
-                            <form action="https://www.paypal.com/donate" method="post" target="_top">
-                                <input type="hidden" name="hosted_button_id" value="LVAHR6S3GM2BC" />
-                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-                                    border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
-                                    alt="Donate with PayPal button" />
-                                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
-                                    height="1" />
-                            </form>
+                            <div class="navbar-donate-button">
+                                <div id="donate-button-navbar"></div>
+                            </div>
                             <!-- <b-button href="index.html#donations" class="btn-donate">Donate</b-button> -->
                         </b-nav-item>
                         <b-navbar-toggle target="nav-collapse" class="d-lg-none"></b-navbar-toggle>
@@ -89,16 +126,12 @@
             </div>
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav class="d-lg-none">
+                    <b-nav-item href="app.html">The App</b-nav-item>
                     <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'" @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
                     <b-nav-item>
-                        <form action="https://www.paypal.com/donate" method="post" target="_top">
-                            <input type="hidden" name="hosted_button_id" value="LVAHR6S3GM2BC" />
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-                                border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
-                                alt="Donate with PayPal button" />
-                            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
-                                height="1" />
-                        </form>
+                        <div class="navbar-donate-button-mobile">
+                            <div id="donate-button-navbar-mobile"></div>
+                        </div>
                         <!-- <b-button href="index.html#donations" class="btn-donate w-100 mt-2">Donate</b-button> -->
                     </b-nav-item>
                 </b-navbar-nav>
@@ -130,7 +163,8 @@
             <b-container>
                 <div class="section-header">
                     <h2>Who We Serve</h2>
-                    <p class="lead">Hey Justice is designed for individuals and families who need accessible legal support and safety tools.</p>
+                    <p class="lead">Hey Justice is for anyone who needs clarity and confidence when facing the legal system. Hey Justice serves individuals navigating 
+                        court cases, families trying to understand legal documents, and everytday people who want to understand their rights.</p>
                 </div>
                 <b-row>
                     <b-col v-for="persona in userPersonas" :key="persona.id" md="6" lg="3" class="mb-4">
@@ -204,11 +238,12 @@
                 <b-row align-v="center">
                     
                     <b-col class="col-md-6 offset-md-3">
-                        <b-card>
-                            <h4 class="text-dark">Join the Waitlist</h4>
-                            <p class="text-dark">Get notified when the app launches and receive exclusive early access.</p>
-                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSee3AsdjpoQDSuvwRMaxsxaZqt2wxcnMEVg8sswgWQYpMeaVg/viewform?embedded=true" width="440" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-                            
+                        <b-card class="mobile-no-padding">
+                            <h4 class="text-dark text-center">Join the Waitlist</h4>
+                            <p class="text-dark text-center">Get notified when the app launches and receive exclusive early access.</p>
+                            <div id="waitlist-iframe-container" class="d-flex justify-content-center align-items-center">
+                                <iframe id="waitlist-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSee3AsdjpoQDSuvwRMaxsxaZqt2wxcnMEVg8sswgWQYpMeaVg/viewform?embedded=true" width="100%" height="540" frameborder="0" marginheight="0" marginwidth="0" style="max-width: 440px;">Loading…</iframe>
+                            </div>
                         </b-card>
                     </b-col>
                 </b-row>
@@ -218,20 +253,21 @@
         <section id="contact" class="section">
             <b-container>
                 <div class="section-header">
-                    <h2>Contact Us</h2>
+                    <h2 class="text-center">Contact Us</h2>
+                    <p class="lead text-center">Need guidance, have questions, or want to share feedback? Connect with the Hey Justice team, we're here to support you.</p>
                 </div>
-                <b-row>
-                    <b-col md="6" class="mb-4 mb-md-0">
-                        <!-- <h4>Follow us on social media:</h4>
-                        <p>
-                            <a href="#" class="text-white mr-3">Facebook</a>
-                            <a href="#" class="text-white mr-3">Twitter</a>
-                            <a href="#" class="text-white mr-3">Snapchat</a>
-                            <a href="#" class="text-white">YouTube</a>
-                        </p> -->
-                    </b-col>
-                    <b-col md="6">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSePxf8Wh8qaku3rTuQFKjcKrECSoDlLWQ8Hdo1hU0e-MUiXpA/viewform?embedded=true" width="640" height="1284" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                <b-row class="justify-content-center">
+                    <b-col md="8" class="text-center">
+                        <b-card class="mobile-no-padding">
+                            <h4 class="text-dark text-center">Get in Touch With Us</h4>
+                            <p class="text-dark text-center">Your message helps us improve the tools and resources that keep you informed, prepared, and protected.</p>
+                            <div id="contact-form-iframe-container" class="d-flex justify-content-center">
+                                <iframe
+                                    id="contact-form-iframe"
+                                    src="https://docs.google.com/forms/d/e/1FAIpQLSePxf8Wh8qaku3rTuQFKjcKrECSoDlLWQ8Hdo1hU0e-MUiXpA/viewform?embedded=true"
+                                    width="100%" height="1284" frameborder="0" marginheight="0" marginwidth="0" style="max-width: 640px;">Loading…</iframe>
+                            </div>
+                        </b-card>
                     </b-col>
                 </b-row>
             </b-container>
@@ -247,17 +283,15 @@
             el: '#app',
             data: {
                 isScrolled: false,
-                
                 navItems: [
-                    { id: 'app', text: "The App", url: 'app.html'},
-                    { id: 'partners', text: "Partners", url: 'index.html#partners' },
+                    { id: 'partners', text: 'Partners', url: 'index.html#partners' },
                     { id: 'team', text: 'Team', url: 'index.html#team' },
                     { id: 'contact', text: 'Contact', url: 'app.html#contact' }
                 ],
                 userPersonas: [
                     {
                         id: 1,
-                        title: 'Individuals Facing Charges',
+                        title: 'Individuals Facing Legal Challenges',
                         icon: 'person-badge',
                         description: 'diverse communties of people facing criminal and civil charges.',
                         needs: [
@@ -269,7 +303,7 @@
                     },
                     {
                         id: 2,
-                        title: 'Immigrants & Families',
+                        title: 'Resources for Families Facing Uncertainty',
                         icon: 'people',
                         description: 'People navigating both criminal and immigration legal systems.',
                         needs: [
@@ -405,6 +439,40 @@
         });
     </script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+    
+    <!-- Initialize navbar PayPal buttons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Only initialize if the PayPal SDK is loaded
+            if (typeof PayPal !== 'undefined' && typeof PayPal.Donation !== 'undefined') {
+                // Initialize desktop navbar button
+                if (document.getElementById('donate-button-navbar')) {
+                    PayPal.Donation.Button({
+                        env: 'production',
+                        hosted_button_id: 'NXYEN3LAX8NGE',
+                        image: {
+                            src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
+                            alt: 'Donate with PayPal button',
+                            title: 'PayPal - The safer, easier way to pay online!',
+                        }
+                    }).render('#donate-button-navbar');
+                }
+                
+                // Initialize mobile navbar button
+                if (document.getElementById('donate-button-navbar-mobile')) {
+                    PayPal.Donation.Button({
+                        env: 'production',
+                        hosted_button_id: 'NXYEN3LAX8NGE',
+                        image: {
+                            src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
+                            alt: 'Donate with PayPal button',
+                            title: 'PayPal - The safer, easier way to pay online!',
+                        }
+                    }).render('#donate-button-navbar-mobile');
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

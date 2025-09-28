@@ -46,6 +46,54 @@
     <link rel="stylesheet" href="https://use.typekit.net/fonts.css">
     <style>
         @import url('https://use.typekit.net/fonts.css');
+        
+        /* Iframe styling for all screen sizes */
+        #waitlist-iframe-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        
+        #waitlist-iframe {
+            display: block;
+            margin: 0 auto;
+            max-width: 440px;
+        }
+        
+        /* Custom responsive styles for iframes */
+        @media (max-width: 767.98px) {
+            /* Remove padding and margin for waitlist iframe */
+            #waitlist-iframe {
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+            
+            /* Remove padding and margin for contact form iframe */
+            #contact-form-iframe {
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+            
+            /* Remove padding from parent containers */
+            #contact-form-iframe-container,
+            #waitlist-iframe-container {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            
+            /* Adjust card padding on mobile */
+            .mobile-no-padding {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
     </style>
 
     <!-- Required Stylesheets -->
@@ -59,6 +107,9 @@
     <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- PayPal Donation SDK -->
+    <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
 
 </head>
 
@@ -76,15 +127,9 @@
                     </b-navbar-nav>
                     <b-navbar-nav>
                         <b-nav-item class="d-none d-lg-block ml-3">
-                            <form action="https://www.paypal.com/donate" method="post" target="_top">
-                                <input type="hidden" name="hosted_button_id" value="LVAHR6S3GM2BC" />
-                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-                                    border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
-                                    alt="Donate with PayPal button" />
-                                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
-                                    height="1" />
-                            </form>
-
+                            <div class="navbar-donate-button">
+                                <div id="donate-button-navbar"></div>
+                            </div>
                             <!-- <b-button @click="scrollTo('donations')" class="btn-donate">Donate</b-button> -->
                         </b-nav-item>
                         <b-navbar-toggle target="nav-collapse" class="d-lg-none"></b-navbar-toggle>
@@ -96,14 +141,9 @@
                     <b-nav-item v-for="item in navItems" :key="item.id" :href="item.url || '#'"
                         @click="item.url ? null : scrollTo(item.id)">{{ item.text }}</b-nav-item>
                     <b-nav-item>
-                        <form action="https://www.paypal.com/donate" method="post" target="_top">
-                            <input type="hidden" name="hosted_button_id" value="LVAHR6S3GM2BC" />
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-                                border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
-                                alt="Donate with PayPal button" />
-                            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
-                                height="1" />
-                        </form>
+                        <div class="navbar-donate-button-mobile">
+                            <div id="donate-button-navbar-mobile"></div>
+                        </div>
                         <!-- <b-button @click="scrollTo('donations')" class="btn-donate w-100 mt-2">Donate</b-button> -->
                     </b-nav-item>
                 </b-navbar-nav>
@@ -147,7 +187,7 @@
                                     with accessible, culturally fluent legal support through smart mobile first
                                     technology. Making justice not just a concept, but a tool people can use. </p>
                                 <p class="text-left"><b>Our Purpose:</b> Hey Justice bridges legal access gaps,
-                                    humanizes technology, and helps diverse communities navigate the law.</p>
+                                    humanizes technology, and helps navigate the law.</p>
                                 <b-button href="index.html#team" variant="secondary" size="lg" class="text-left">Learn
                                     more</b-button>
                             </div>
@@ -206,9 +246,9 @@
             <b-container>
                 <div class="section-header" style="margin-bottom: 10px;">
                     <h2>Why Hey Justice?</h2>
-                    <p class="lead">Hey Justice gives people the tools, guidance, and confidence to navigate the legal system.
-                        Understand their rights, and protect themselves. We help make the law clear, accessible, and
-                        culturally fluent so everyone can face legal challenges with knowledge and support.</p>
+                    <p class="lead">Hey Justice gives people the tools, guidance, and confidence to navigate the legal system,
+                        understand court documents, and protect your rights. We make the law clear, accessible, and culturally 
+                        fluent so you can face legal challenges with knowledge and support.</p>
                     <div>
                         <b-button href="index.html#contact" variant="primary" size="lg">Partner with us</b-button>
                     </div>
@@ -230,8 +270,7 @@
             <b-container>
                 <div class="section-header">
                     <h2>We're creating an app to help</h2>
-                    <p class="lead">Hey Justice! is an app that makes justice more accessible, clear, and culturally
-                        relevant for diverse communities.</p>
+                    <p class="lead">Hey Justice is a legal technology app, that makes the law accessible, clear and culturally relevant.</p>
                     <div class="cta-row d-flex flex-wrap justify-content-center align-items-center">
                         <b-button href="app.html" variant="primary" size="lg" class="mr-3 mb-2">Learn more</b-button>
                         <!-- <b-form @submit.prevent class="d-flex align-items-center mb-2">
@@ -301,34 +340,37 @@
                     </b-col> -->
                     <b-col class="col-md-6 offset-md-3">
                         <b-card>
-                            <h4>Support the cause</h4>
+                            <h4>Support</h4>
                             <p class="lead">Keep Hey Justice at your fingertips, get the guidance, tools, and
                                 reminders you rely on. Support us with a one time or recurring contribution.</p>
                             <!-- <b-button variant="success" size="lg" block>Donate Now</b-button> -->
                             <div id="donate-button-container">
                                 <div id="donate-button"></div>
-                                <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js"
-                                    charset="UTF-8"></script>
                                 <script>
-                                    PayPal.Donation.Button({
-                                        env: 'production',
-                                        hosted_button_id: 'NXYEN3LAX8NGE',
-                                        image: {
-                                            src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
-                                            alt: 'Donate with PayPal button',
-                                            title: 'PayPal - The safer, easier way to pay online!',
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        if (typeof PayPal !== 'undefined' && typeof PayPal.Donation !== 'undefined') {
+                                            PayPal.Donation.Button({
+                                                env: 'production',
+                                                hosted_button_id: 'NXYEN3LAX8NGE',
+                                                image: {
+                                                    src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
+                                                    alt: 'Donate with PayPal button',
+                                                    title: 'PayPal - The safer, easier way to pay online!',
+                                                }
+                                            }).render('#donate-button');
                                         }
-                                    }).render('#donate-button');
+                                    });
                                 </script>
                             </div>
 
                         </b-card>
 
-                        <b-card class="mt-2">
-                            <h4 class="text-dark">Join the Waitlist</h4>
-                            <p class="text-dark">Get notified when the app launches and receive exclusive early access.</p>
-                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSee3AsdjpoQDSuvwRMaxsxaZqt2wxcnMEVg8sswgWQYpMeaVg/viewform?embedded=true" width="440" height="540" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-                            
+                        <b-card class="mt-2 mobile-no-padding">
+                            <h4 class="text-dark text-center">Join the Waitlist</h4>
+                            <p class="text-dark text-center">Get notified when the app launches and receive exclusive early access.</p>
+                            <div id="waitlist-iframe-container" class="d-flex justify-content-center align-items-center">
+                                <iframe id="waitlist-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSee3AsdjpoQDSuvwRMaxsxaZqt2wxcnMEVg8sswgWQYpMeaVg/viewform?embedded=true" width="100%" height="540" frameborder="0" marginheight="0" marginwidth="0" style="max-width: 440px;">Loading…</iframe>
+                            </div>
                         </b-card>
                     </b-col>
                 </b-row>
@@ -370,20 +412,14 @@
                         feedback? Connect with the Hey Justice team, we're here to support you. Your message helps us
                         improve the tools and resources that keep you informed, prepared, and protected.</p>
                 </div>
-                <b-row>
-                    <b-col md="5" class="mb-4 mb-md-0">
-                        <!-- <h4>Follow us on social media:</h4>
-                        <p>
-                            <a href="#" class="text-white mr-3">Facebook</a>
-                            <a href="#" class="text-white mr-3">Twitter</a>
-                            <a href="#" class="text-white mr-3">Snapchat</a>
-                            <a href="#" class="text-white">YouTube</a>
-                        </p> -->
-                    </b-col>
-                    <b-col md="7">
-                        <iframe
-                            src="https://docs.google.com/forms/d/e/1FAIpQLSePxf8Wh8qaku3rTuQFKjcKrECSoDlLWQ8Hdo1hU0e-MUiXpA/viewform?embedded=true"
-                            width="540" height="1284" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                <b-row class="justify-content-center">
+                    <b-col md="8" class="text-center">
+                        <div id="contact-form-iframe-container" class="d-flex justify-content-center">
+                            <iframe
+                                id="contact-form-iframe"
+                                src="https://docs.google.com/forms/d/e/1FAIpQLSePxf8Wh8qaku3rTuQFKjcKrECSoDlLWQ8Hdo1hU0e-MUiXpA/viewform?embedded=true"
+                                width="100%" height="1284" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                        </div>
                     </b-col>
                 </b-row>
             </b-container>
@@ -536,6 +572,40 @@
         });
     </script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+    
+    <!-- Initialize navbar PayPal buttons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Only initialize if the PayPal SDK is loaded
+            if (typeof PayPal !== 'undefined' && typeof PayPal.Donation !== 'undefined') {
+                // Initialize desktop navbar button
+                if (document.getElementById('donate-button-navbar')) {
+                    PayPal.Donation.Button({
+                        env: 'production',
+                        hosted_button_id: 'NXYEN3LAX8NGE',
+                        image: {
+                            src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
+                            alt: 'Donate with PayPal button',
+                            title: 'PayPal - The safer, easier way to pay online!',
+                        }
+                    }).render('#donate-button-navbar');
+                }
+                
+                // Initialize mobile navbar button
+                if (document.getElementById('donate-button-navbar-mobile')) {
+                    PayPal.Donation.Button({
+                        env: 'production',
+                        hosted_button_id: 'NXYEN3LAX8NGE',
+                        image: {
+                            src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
+                            alt: 'Donate with PayPal button',
+                            title: 'PayPal - The safer, easier way to pay online!',
+                        }
+                    }).render('#donate-button-navbar-mobile');
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
